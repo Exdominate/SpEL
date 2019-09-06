@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-2.5.xsd
+">
+    
+    <bean id="helloBean" class="com.quick.Helloworld">
+        <property name="Hello" value="My first Spring App"/>
+    </bean>    
+     <bean id="bye" class="com.quick.Bye">
+        <property name="goodbye" value="Bye!"/>
+    </bean>    
+    <!--TEST SpEL-->
+     <bean id="testspel" class="com.quick.TestSpEL">
+        <property name="home" value="#{5}"/>
+        <property name="street" value="#{'Golodeda'}"/>
+        <property name="dblval" value="#{9.87E4}"/>
+        <property name="ifalse" value="#{false}"/>
+        <property name="pi" value="#{3.14159}"/>
+        <property name="mathuse" value="#{T(Math).exp(1)}"/>
+        <property name="artist" value="#{sgtpeppers.artist}"/>
+        <property name="sgt" value="#{sgtpeppers}"/>
+        <property name="select" value="#{sgtpeppers.SelectArtist()}"/>
+        <property name="people" value="#{people}"/>
+        <property name="names" value="#{people.![name]}"/>
+        <property name="peoplesByIdentifier" value="#{people.?[id eq 1 or id eq 4 ]}"/>
+        <property name="namesOfPeopleByIdentifier" value="#{people.?[id == 1||id ==4 ].![name]}"/>        
+    </bean> 
+    
+    <util:list id="people">
+        <bean class="com.quick.Person">
+            <property name="name" value="Yuli"/>
+            <property name="surname" value="Slabko"/>
+            <property name="id" value="1"/>
+        </bean>
+        <bean class="com.quick.Person">
+            <property name="name" value="Igor"/>
+            <property name="surname" value="Mong"/>
+            <property name="id" value="2"/>
+        </bean>
+        <bean class="com.quick.Person">
+            <property name="name" value="Taya"/>
+            <property name="surname" value="Smith"/>
+            <property name="id" value="3"/>
+        </bean>
+        <bean class="com.quick.Person">
+            <property name="name" value="Kim"/>
+            <property name="surname" value="Won"/>
+            <property name="id" value="4"/>
+        </bean>
+    </util:list>   
+    
+     <bean id="sgtpeppers" class="com.quick.sgtPeppers">
+         <property name="artist" value="#{'Artistick'}"/>       
+    </bean>    
+</beans>
